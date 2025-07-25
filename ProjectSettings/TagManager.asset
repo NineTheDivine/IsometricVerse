@@ -41,6 +41,3 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: MapTiles
-    uniqueID: 3370365213
-    locked: 0

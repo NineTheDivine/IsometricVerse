@@ -4,10 +4,5 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField]PlayerController controller;
 
-    private void Awake()
-    {
-        
-    }
 }

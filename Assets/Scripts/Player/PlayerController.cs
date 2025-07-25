@@ -26,6 +26,20 @@ public class PlayerController : MonoBehaviour
         sprite = GetComponentInChildren<SpriteRenderer>();
     }
 
+    private void Start()
+    {
+        if (_rigidbody == null)
+        {
+            Debug.Log("PlayerController Rigidbody is empty");
+            return;
+        }
+        if (sprite == null)
+        {
+            Debug.Log("PlayerController SpriteRenderer is empty");
+            return;
+        }
+    }
+
     private void FixedUpdate()
     {
         if (_isJumping)
