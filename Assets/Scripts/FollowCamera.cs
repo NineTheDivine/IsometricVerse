@@ -6,6 +6,7 @@ public class FollowCamera : MonoBehaviour
 {
     public Transform target;
     Vector2 offset;
+    [SerializeField] bool FixedY= false;
     void Start()
     {
         if (target == null)
@@ -21,6 +22,8 @@ public class FollowCamera : MonoBehaviour
     {
         Vector2 pos = transform.position;
         pos = (Vector2)target.position + offset;
-        transform.position = new Vector3(pos.x, pos.y, transform.position.z);
+        transform.position = new Vector3(pos.x, 
+            FixedY ? transform.position.y : pos.y,
+            transform.position.z);
     }
 }
