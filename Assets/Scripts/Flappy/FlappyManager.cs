@@ -9,6 +9,7 @@ public class FlappyManager : MonoBehaviour
 {
     [SerializeField] Canvas _ReadyUI;
     [SerializeField] Canvas _DeadUI;
+    [SerializeField] Canvas _PlayUI;
     public enum GameState
     {
         Ready,
@@ -51,6 +52,7 @@ public class FlappyManager : MonoBehaviour
         plane.setStop(true);
         _currentScore = 0;
         _DeadUI.enabled = false;
+        _PlayUI.enabled = false;
         _ReadyUI.enabled = true;
     }
 
@@ -58,13 +60,15 @@ public class FlappyManager : MonoBehaviour
     {
         //hide ready ui
         plane.setStop(false);
+        _PlayUI.enabled=true;
+        _PlayUI.transform.Find("BestTxt").GetComponent<TextMeshProUGUI>().text = "Best : " + _bestScore.ToString();
         _ReadyUI.enabled=false;
     }
 
     private void onDead()
     {
         //visualize dead ui
-
+        _PlayUI.enabled = false;
         _DeadUI.enabled = true;
         TextMeshProUGUI ScoreValueText = _DeadUI.transform.Find("ScoreValueTxt").GetComponent<TextMeshProUGUI>();
         ScoreValueText.text = _currentScore.ToString();
@@ -82,5 +86,6 @@ public class FlappyManager : MonoBehaviour
     {
         _currentScore += amount;
         plane.setAdditionalSpeed((_currentScore / 5) / 2.0f);
+        _PlayUI.transform.Find("ScoreTxt").GetComponent<TextMeshProUGUI>().text = "Score : " + _currentScore.ToString();
     }
 }
