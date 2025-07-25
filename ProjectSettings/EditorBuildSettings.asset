@@ -8,5 +8,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MapScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/FlappyScene.unity
+    guid: 8d5bdce0bd8788f439c252992f6c9694
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 382fbccd1284e1747861068ae6d8b2a9, type: 2}

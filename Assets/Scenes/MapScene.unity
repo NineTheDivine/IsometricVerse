@@ -4363,6 +4363,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 637477818}
+  FixedY: 0
 --- !u!1 &637477816
 GameObject:
   m_ObjectHideFlags: 0
@@ -4411,6 +4412,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad10a533ed4dd7a4db032e102cfbe623, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentArea: {fileID: 0}
 --- !u!114 &637477820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9477,6 +9479,10 @@ PrefabInstance:
     - target: {fileID: 1540790188751254188, guid: 0e6dd17e373ee9c4b857339bc6088698, type: 3}
       propertyPath: m_text
       value: Flappy
+      objectReference: {fileID: 0}
+    - target: {fileID: 3509919965641113959, guid: 0e6dd17e373ee9c4b857339bc6088698, type: 3}
+      propertyPath: NextScene
+      value: FlappyScene
       objectReference: {fileID: 0}
     - target: {fileID: 5428186759652376496, guid: 0e6dd17e373ee9c4b857339bc6088698, type: 3}
       propertyPath: m_Pivot.x
