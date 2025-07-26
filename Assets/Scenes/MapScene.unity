@@ -7562,7 +7562,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 137f3f8444436e046ab11ac9ab2895c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NextScene: 
+  NextScene: CrossyScene
 --- !u!1 &1773692471
 GameObject:
   m_ObjectHideFlags: 0
