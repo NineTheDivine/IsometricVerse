@@ -30,6 +30,8 @@ public class FlappyManager : MonoBehaviour
             Debug.Log("_ReadyUI not found in FlappyManager");
         if (_DeadUI == null)
             Debug.Log("_DeadUI not found in FlappyManager");
+        if(PlayerManager.Instance.sessionGold == null)
+            PlayerManager.Instance.InitSessionGold();
         currentState = GameState.Ready;
         _bestScore = PlayerPrefs.GetInt(_bestKey, 0);
         ChangeState(GameState.Ready);
