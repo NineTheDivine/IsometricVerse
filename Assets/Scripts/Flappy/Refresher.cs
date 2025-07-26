@@ -14,5 +14,9 @@ public class Refresher : MonoBehaviour
         {
             collision.gameObject.GetComponent<Obstacle>().GiveRandomPos();
         }
+        if (collision.gameObject.CompareTag("Gold"))
+        {
+            collision.gameObject.GetComponent<Gold>().GiveRandomPos();
+        }
     }
 }
