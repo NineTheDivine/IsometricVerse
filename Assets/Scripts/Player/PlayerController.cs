@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
 
     protected bool _isJumping = false;
 
-    public Area currentArea = null;
+    public List<Area> currentArea = new List<Area> ();
 
     private void Awake()
     {
@@ -82,8 +82,10 @@ public class PlayerController : MonoBehaviour
 
     void OnEnter(InputValue input)
     {
-        if (currentArea != null)
-            currentArea.ActivateArea();
+        if (currentArea.Count == 1)
+        {
+            currentArea[0].ActivateArea();
+        }
     }
 
     void JumpAction()
@@ -100,10 +102,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void SetArea(Area area)
+    public void AddArea(Area area)
     {
-        if (currentArea != null)
-            return;
-        currentArea = area;
+        currentArea.Add(area);
+    }
+
+    public void RemoveArea(Area area)
+    {
+        currentArea.Remove(area);
     }
 }
