@@ -6,11 +6,11 @@ public class MapUIBtn : MonoBehaviour
 {
     public void OnHidePress(Canvas ui)
     {
-        ui.enabled = false;
+        ui.gameObject.SetActive(false);
     }
 
     public void OnShowPress(Canvas ui)
     {
-        ui.enabled = true;
+        ui.gameObject.SetActive(true);
     }
 }

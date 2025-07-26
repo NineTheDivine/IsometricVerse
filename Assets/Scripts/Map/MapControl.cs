@@ -20,15 +20,13 @@ public class MapControl : MonoBehaviour
     {
         if (PlayerManager.Instance.sessionGold == null)
         {
-            sessionEndUI.enabled = false;
+            sessionEndUI.gameObject.SetActive(false);
         }
         else
         {
-            sessionEndUI.enabled = true;
-            //Do session Gold Text Adjustment
-            sessionEndUI.transform.Find("AmountTxt").GetComponent<TextMeshProUGUI>().text = "+ " + PlayerManager.Instance.sessionGold.ToString();
-            //Call End Gold
-            PlayerManager.Instance.EndSessionGold();
+            sessionEndUI.gameObject.SetActive(true);
+            sessionEndUI.transform.Find("AmountTxt").GetComponent<TextMeshProUGUI>().text =
+                (PlayerManager.Instance.sessionGold == 0 ? "" : "+ ") + PlayerManager.Instance.sessionGold.ToString() + " G";
         }
     }
 }

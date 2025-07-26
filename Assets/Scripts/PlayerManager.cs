@@ -37,7 +37,8 @@ public class PlayerManager : MonoBehaviour
 
     public void EndSessionGold()
     {
-        Debug.Log("Current Session gold is " + _sessionGold.ToString());
+        if (_sessionGold == null)
+            return;
         _gold += (int)_sessionGold;
         _sessionGold = null;
     }
