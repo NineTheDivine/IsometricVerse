@@ -25,9 +25,8 @@ public class MapControl : MonoBehaviour
         else
         {
             sessionEndUI.gameObject.SetActive(true);
-            //Do session Gold Text Adjustment
-            sessionEndUI.transform.Find("AmountTxt").GetComponent<TextMeshProUGUI>().text = 
-                (PlayerManager.Instance.sessionGold == 0 ? "" : "+ ") + PlayerManager.Instance.sessionGold.ToString();
+            sessionEndUI.transform.Find("AmountTxt").GetComponent<TextMeshProUGUI>().text =
+                (PlayerManager.Instance.sessionGold == 0 ? "" : "+ ") + PlayerManager.Instance.sessionGold.ToString() + " G";
         }
     }
 }
