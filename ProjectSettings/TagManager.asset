@@ -7,6 +7,8 @@ TagManager:
   - Obstacle
   - Area
   - Gold
+  - HorizontalReload
+  - VerticalReload
   layers:
   - Default
   - TransparentFX
