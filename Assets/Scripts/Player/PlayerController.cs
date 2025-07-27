@@ -64,12 +64,12 @@ public class PlayerController : MonoBehaviour
         if (_rigidbody.velocity.x > 0)
         {
             playerSprite.flipX = true;
-            shadowSprite.transform.localPosition = new Vector3(-0.02f, shadowSprite.transform.localPosition.y);
+            shadowSprite.transform.localPosition = new Vector3(-0.04f, shadowSprite.transform.localPosition.y);
         }
         else if (_rigidbody.velocity.x < 0)
         {
             playerSprite.flipX = false;
-            shadowSprite.transform.localPosition = new Vector3(0.0f, shadowSprite.transform.localPosition.y);
+            shadowSprite.transform.localPosition = new Vector3(0.02f, shadowSprite.transform.localPosition.y);
         }
     }
 
