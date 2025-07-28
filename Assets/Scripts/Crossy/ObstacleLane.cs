@@ -14,8 +14,16 @@ public class ObstacleLane : MonoBehaviour
     private int count;
     private bool isReverse;
 
-    public void InitRandom()
+    public void InitRandom(int index)
     {
+        foreach (UFO ufo in ufoList)
+        {
+            Destroy(ufo.gameObject);
+        }
+        ufoList.Clear();
+        transform.localPosition = tilemap.GetCellCenterLocal(Vector3Int.zero + Vector3Int.right * index * 4 + Vector3Int.left * 2);
+        transform.localPosition += Vector3.forward * 50;
+
         speed = Random.Range(3.0f, 5.0f);
         count = Random.Range(4, 6);
         isReverse = (Random.Range(0.0f, 1.0f) >= 0.5f ? true: false);
@@ -51,12 +59,4 @@ public class ObstacleLane : MonoBehaviour
         tilemap = GetComponent<Tilemap>();
         ufoList = new List<UFO>();
     }
-
-
-    private void Start()
-    {
-        InitRandom();
-    }
-
-
 }

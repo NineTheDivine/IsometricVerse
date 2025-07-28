@@ -10,15 +10,11 @@ public class CrossyCharController : MonoBehaviour
     private float delay = 0.0f;
     private bool isStop = true;
     [SerializeField] Tilemap playerTilemap;
-    [SerializeField] Physics2D physics2D;
+    [SerializeField] CrossyManager crossyManager;
     public LayerMask blcokLayer;
 
     private bool isDead = false;
 
-    private void Awake()
-    {
-        physics2D = GetComponent<Physics2D>();
-    }
 
     void OnFoward(InputValue input)
     {
@@ -27,6 +23,7 @@ public class CrossyCharController : MonoBehaviour
         if (!isStop) return;
         //Move Foward
         Vector3 targetposition = playerTilemap.GetCellCenterWorld(new Vector3Int(1, 0, 0));
+        crossyManager.playerFowardAction();
         delay = MovementDelay;
         isStop = false;
         StartCoroutine(KeyDelay(targetposition));
@@ -40,7 +37,7 @@ public class CrossyCharController : MonoBehaviour
         Vector3 targetposition = playerTilemap.GetCellCenterWorld(new Vector3Int(0, 1, 0));
 
         //if obstacle, return
-        if (Physics2D.OverlapCircle(targetposition, 0.2f, blcokLayer))
+        if (Physics2D.OverlapBox(targetposition + Vector3.down, playerTilemap.cellSize, 0, blcokLayer))
             return;
         //if no obstacle, move
         delay = MovementDelay;
@@ -55,7 +52,7 @@ public class CrossyCharController : MonoBehaviour
         if (!isStop) return;
 
         Vector3 targetposition = playerTilemap.GetCellCenterWorld(new Vector3Int(0, -1, 0));
-        if (Physics2D.OverlapCircle(targetposition, 0.2f, blcokLayer))
+        if (Physics2D.OverlapBox(targetposition + Vector3.down, playerTilemap.cellSize, 0, blcokLayer))
             return;
         delay = MovementDelay;
         isStop = false;

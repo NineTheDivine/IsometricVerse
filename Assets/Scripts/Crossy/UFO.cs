@@ -30,8 +30,6 @@ public class UFO : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-
-        Debug.Log("Call");
         if (collision.gameObject.CompareTag("HorizontalReload"))
         {
             //move to other side
