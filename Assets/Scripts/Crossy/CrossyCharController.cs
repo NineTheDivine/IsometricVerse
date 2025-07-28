@@ -21,6 +21,7 @@ public class CrossyCharController : MonoBehaviour
         if(isDead) return;
         //if delay, return
         if (!isStop) return;
+        if (crossyManager.currentState != CrossyManager.GameState.Play) return;
         //Move Foward
         Vector3 targetposition = playerTilemap.GetCellCenterWorld(new Vector3Int(1, 0, 0));
         crossyManager.playerFowardAction();
@@ -34,6 +35,7 @@ public class CrossyCharController : MonoBehaviour
         if(isDead) return;
         //if delay, return
         if (!isStop) return;
+        if (crossyManager.currentState != CrossyManager.GameState.Play) return;
         Vector3 targetposition = playerTilemap.GetCellCenterWorld(new Vector3Int(0, 1, 0));
 
         //if obstacle, return
@@ -50,7 +52,7 @@ public class CrossyCharController : MonoBehaviour
         if(isDead) return;
         //if delay, return
         if (!isStop) return;
-
+        if (crossyManager.currentState != CrossyManager.GameState.Play) return;
         Vector3 targetposition = playerTilemap.GetCellCenterWorld(new Vector3Int(0, -1, 0));
         if (Physics2D.OverlapBox(targetposition + Vector3.down, playerTilemap.cellSize, 0, blcokLayer))
             return;
@@ -82,6 +84,7 @@ public class CrossyCharController : MonoBehaviour
         isDead = true;
         playerTilemap.ClearAllTiles();
         //show ui
+        crossyManager.ChangeState(CrossyManager.GameState.Dead);
     }
 
 }
