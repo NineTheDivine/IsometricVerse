@@ -8,7 +8,6 @@ using UnityEngine.SceneManagement;
 public class Area : MonoBehaviour
 {
     CompositeCollider2D _collision;
-    GameObject Tower;
     Animator _anim;
 
     [SerializeField] string NextScene = "";
@@ -16,13 +15,12 @@ public class Area : MonoBehaviour
     private void Start()
     {
         _collision = GetComponent<CompositeCollider2D>();
+        _anim = transform.Find("UISprite").GetComponent<Animator>();
         if (_collision == null)
         {
             Debug.Log("Area Collision is empty");
             return;
         }
-        Tower = transform.GetChild(0).gameObject;
-        _anim = Tower.transform.Find("UISprite").GetComponent<Animator>();
         if (_anim == null)
         {
             Debug.Log("Area Animator is empty");
@@ -35,8 +33,7 @@ public class Area : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.GetComponent<PlayerController>().SetArea(this);
-            Debug.Log("Player entered Location");
+            collision.GetComponent<PlayerController>().AddArea(this);
             _anim.gameObject.SetActive(true);
             _anim.SetBool("IsOpen", true);
         }
@@ -46,8 +43,7 @@ public class Area : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.GetComponent<PlayerController>().SetArea(null);
-            Debug.Log("Player exit Location");
+            collision.GetComponent<PlayerController>().RemoveArea(this);
             _anim.SetBool("IsOpen", false);
         }
     }
