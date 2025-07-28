@@ -7,7 +7,7 @@ public class UFO : MonoBehaviour
 {
     private float speed = -3f;
     private bool _isReverse = true;
-    public const int BoarderSize = 25;
+    public const int BoarderSize = 18;
     private Tilemap tilemap;
 
     private void Awake()
@@ -42,14 +42,9 @@ public class UFO : MonoBehaviour
 
             return;
         }
-        if (collision.gameObject.CompareTag("VerticalReload"))
-        {
-            //move to top of the board
-            return;
-        }
         if (collision.gameObject.CompareTag("Player"))
         {
-            //kill player
+            collision.GetComponent<CrossyCharController>().KillPlayer();
             return;
         }
     }

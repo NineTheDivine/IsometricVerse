@@ -17,18 +17,33 @@ public class ObstacleLane : MonoBehaviour
     public void InitRandom()
     {
         speed = Random.Range(3.0f, 5.0f);
-        count = Random.Range(4, 8);
-        isReverse = Random.Range(0.0f, 1.0f) >= 0.5f ? true: false;
+        count = Random.Range(4, 6);
+        isReverse = (Random.Range(0.0f, 1.0f) >= 0.5f ? true: false);
 
-        Vector3Int ufopos = new Vector3Int(0, -UFO.BoarderSize/2 , 0);
+        int startpos = -UFO.BoarderSize / 2 + 1;
+        int endpos = UFO.BoarderSize / 2 - 1;
+        int gap = (endpos - startpos) / count;
+        int padding = endpos - (startpos + gap * count);
+
+        startpos += (padding+1) / 2;
+        endpos -= (padding+1) / 2;
+
+        Vector3Int ufopos = new Vector3Int(0, isReverse? startpos : endpos , 0);
         for(int i = 0; i < count; i++)
         {
             UFO ufo = Instantiate(ufoPrefab, transform);
             ufo.Init(this.speed, this.isReverse);
-            ufo.transform.localPosition += tilemap.CellToLocal(ufopos);
             ufoList.Add(ufo);
 
-            ufopos += Vector3Int.up * UFO.BoarderSize/(count);
+            ufo.transform.localPosition += tilemap.CellToLocal(ufopos);
+            if (isReverse)
+            {
+                ufopos += Vector3Int.up * gap;
+            }
+            else
+            {
+                ufopos -= Vector3Int.up * gap;
+            }
         }
     }
     private void Awake()

@@ -6,53 +6,85 @@ using UnityEngine.Tilemaps;
 
 public class CrossyCharController : MonoBehaviour
 {
-    private const float MovementDelay = 0.3f;
+    private const float MovementDelay = 0.4f;
     private float delay = 0.0f;
+    private bool isStop = true;
     [SerializeField] Tilemap playerTilemap;
+    [SerializeField] Physics2D physics2D;
+    public LayerMask blcokLayer;
+
+    private bool isDead = false;
+
+    private void Awake()
+    {
+        physics2D = GetComponent<Physics2D>();
+    }
 
     void OnFoward(InputValue input)
     {
+        if(isDead) return;
         //if delay, return
-        if (delay > 0.0f) return;
+        if (!isStop) return;
         //Move Foward
-        transform.position = playerTilemap.GetCellCenterWorld(new Vector3Int(1, 0, 0));
+        Vector3 targetposition = playerTilemap.GetCellCenterWorld(new Vector3Int(1, 0, 0));
         delay = MovementDelay;
-        StartCoroutine(KeyDelay());
+        isStop = false;
+        StartCoroutine(KeyDelay(targetposition));
     }
 
     void OnLeft(InputValue input)
     {
+        if(isDead) return;
         //if delay, return
-        if (delay > 0.0f) return;
-        //if obstacle, return
+        if (!isStop) return;
+        Vector3 targetposition = playerTilemap.GetCellCenterWorld(new Vector3Int(0, 1, 0));
 
+        //if obstacle, return
+        if (Physics2D.OverlapCircle(targetposition, 0.2f, blcokLayer))
+            return;
         //if no obstacle, move
-        transform.position = playerTilemap.GetCellCenterWorld(new Vector3Int(0, 1, 0));
         delay = MovementDelay;
-        StartCoroutine(KeyDelay());
+        isStop = false;
+        StartCoroutine(KeyDelay(targetposition));
     }
 
     void OnRight(InputValue input)
     {
+        if(isDead) return;
         //if delay, return
-        if (delay > 0.0f) return;
-        //if obstacle, return
+        if (!isStop) return;
 
-        //if no obstacle, move
-        transform.position = playerTilemap.GetCellCenterWorld(new Vector3Int(0, -1, 0));
+        Vector3 targetposition = playerTilemap.GetCellCenterWorld(new Vector3Int(0, -1, 0));
+        if (Physics2D.OverlapCircle(targetposition, 0.2f, blcokLayer))
+            return;
         delay = MovementDelay;
-        StartCoroutine(KeyDelay());
+        isStop = false;
+        StartCoroutine(KeyDelay(targetposition));
     }
 
-    IEnumerator KeyDelay()
+    IEnumerator KeyDelay(Vector3 targetposition)
     {
-        while (delay > 0.0f)
+        while (delay >= 0.0f)
         {
             delay -= Time.fixedDeltaTime;
+            transform.position = new Vector3(
+                Mathf.Lerp(transform.position.x, targetposition.x, delay),
+                Mathf.Lerp(transform.position.y, targetposition.y, delay),
+                transform.position.z
+                );
             yield return new WaitForFixedUpdate();
         }
+        transform.position = targetposition;
         delay = 0.0f;
-        StopCoroutine(KeyDelay());
+        isStop = true;
+        StopCoroutine(KeyDelay(targetposition));
+    }
+
+    public void KillPlayer()
+    {
+        isDead = true;
+        playerTilemap.ClearAllTiles();
+        //show ui
     }
 
 }
