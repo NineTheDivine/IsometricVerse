@@ -21,7 +21,7 @@ public class FlappyManager : MonoBehaviour
     [SerializeField] Plane plane;
     private int _currentScore;
     private int _bestScore;
-    private string _bestKey = "BestScore";
+    private string _bestKey = "FlappyBestScore";
     public int currentScore { get => _currentScore; }
 
     private void Start()
